@@ -1,0 +1,15 @@
+extends ../layout.pug
+block content
+    h1 All items
+table
+    thead
+        tr
+            th Item Name
+            th Description
+            th Image
+    tbody
+        each item in items
+            tr
+                td= item.name
+                td= item.description
+                td= item.image
