@@ -1,7 +1,16 @@
-const ItemsModel =require('../models/ItemsModel')
+// controllers/ItemsController.js
+const itemsModel = require('../models/ItemsModel');
 
+exports.getIndex = async (req, res) => {
+    res.render('layout', { title: 'Items Repository' });
+};
 
+exports.getItems = async (req, res) => {
+    const items = await itemsModel.getItems();
 
-module.exports = {
-    index
-}
+    if (items.length === 0) {
+        return res.status(404).send('No items found');
+    }
+
+    res.render('items/index', { items: items });
+};
