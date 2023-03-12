@@ -1,6 +1,6 @@
 README.md
 
-###
+### Items Repository
 Core app for viewing a list, option to log in for list manipulation (add or delete an item)
 
 Initialization

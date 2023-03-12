@@ -42,3 +42,58 @@ const { Given, When, Then } = require('cucumber');
         After(async function () {
         await driver.quit();
         });
+
+// See details
+import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps'
+
+        Given('I am a logged in user', () => {
+        // Implement login process, assuming the user is already logged in
+        })
+
+        Given('I am on the homepage', () => {
+        cy.visit('/')
+        })
+
+        When('I click on an item', () => {
+        cy.get('.item').first().click() // Click on the first item element found
+        })
+
+        Then('I should be able to see the item\'s name, image, and description', () => {
+        cy.get('.item-name').should('be.visible') // Assert that the item name is visible
+        cy.get('.item-image').should('be.visible') // Assert that the item image is visible
+        cy.get('.item-description').should('be.visible') // Assert that the item description is visible
+        })
+
+        When('I click on a non-existent item', () => {
+        // Click on a non-existent item, assuming that such an element does not exist
+        cy.get('.non-existent-item').should('not.exist')
+        })
+
+        Then('I should see an error message', () => {
+        cy.get('.error-message').should('be.visible') // Assert that the error message is visible
+        cy.get('.item-name').should('not.exist') // Assert that the item name is not visible
+        cy.get('.item-image').should('not.exist') // Assert that the item image is not visible
+        cy.get('.item-description').should('not.exist') // Assert that the item description is not visible
+        })
+
+        Then('I should not be able to see any item details', () => {
+        cy.get('.item-name').should('not.exist') // Assert that the item name is not visible
+        cy.get('.item-image').should('not.exist') // Assert that the item image is not visible
+        cy.get('.item-description').should('not.exist') // Assert that the item description is not visible
+        })
+
+        Given('the item exists', () => {
+        // Assume that the item exists in the database
+        })
+
+        Given('I am not authorized to view the item', () => {
+        // Assume that the user is not authorized to view the item
+        })
+
+        Then('I should see a 403 Forbidden error message', () => {
+        cy.get('.error-message').should('be.visible') // Assert that the error message is visible
+        cy.contains('403 Forbidden').should('be.visible') // Assert that the error message contains "403 Forbidden"
+        cy.get('.item-name').should('not.exist') // Assert that the item name is not visible
+        cy.get('.item-image').should('not.exist') // Assert that the item image is not visible
+        cy.get('.item-description').should('not.exist') // Assert that the item description is not visible
+        })

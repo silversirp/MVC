@@ -1,6 +1,13 @@
-// models/ItemsModel.js
-const prisma = require('../prismaClient');
+const { PrismaClient } = require('@prisma/client');
 
-exports.getItems = () => {
-    return prisma.item.findMany();
+const prisma = new PrismaClient();
+
+module.exports = {
+    async getItems() {
+        return prisma.item.findMany();
+    },
+
+    async getItem(id) {
+        return prisma.item.findUnique({ where: { id } });
+    }
 };

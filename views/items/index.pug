@@ -1,15 +1,22 @@
 extends ../layout.pug
 block content
     h1 All items
-    table
-        thead
-            tr
-                th Item Name
-                th Description
-                th Image
-        tbody
-            each item in items
+
+    if items.length > 0
+        table
+            thead
                 tr
-                    td= item.name
-                    td= item.description
-                    td= item.image
+                    th Item Id
+                    th Item Name
+                    th Description
+                    th Image
+            tbody
+                each item in items
+                    tr
+                        td
+                            a(href=`/items/${item.id}`)= item.id
+                        td= item.name
+                        td= item.description
+                        td= item.image
+    else
+        p No items found

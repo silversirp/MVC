@@ -1,16 +1,22 @@
-// controllers/ItemsController.js
-const itemsModel = require('../models/ItemsModel');
+const express = require('express');
+const router = express.Router();
 
-exports.getIndex = async (req, res) => {
-    res.render('layout', { title: 'Items Repository' });
-};
+const ItemsModel = require('../models/ItemsModel');
 
-exports.getItems = async (req, res) => {
-    const items = await itemsModel.getItems();
+router.get('/', async (req, res) => {
+    const items = await ItemsModel.getItems();
 
-    if (items.length === 0) {
-        return res.status(404).send('No items found');
+    res.render('items/index', { items });
+});
+
+router.get('/:id', async (req, res) => {
+    const item = await ItemsModel.getItem(parseInt(req.params.id));
+
+    if (!item) {
+        return res.status(404).send('Item not found');
     }
 
-    res.render('items/index', { items: items });
-};
+    res.render('items/details', { item });
+});
+
+module.exports = router;
